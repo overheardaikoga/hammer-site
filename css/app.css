@@ -1,0 +1,113 @@
+/* ===== Hammer-Site — app.css ===== */
+
+/* Тема */
+:root{
+  --bg: linear-gradient(135deg,#0d1b4c 0%,#1d2f8d 45%,#4b2bbf 100%);
+  --btn: linear-gradient(135deg,#3b82f6,#9333ea);
+  --text:#fff;
+  --panel: rgba(255,255,255,.08);
+}
+
+/* База */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--text);
+  text-align:center;
+  background:var(--bg);                 /* вернули градиент */
+}
+.container{max-width:960px;margin:0 auto;padding:22px 16px}
+
+/* Кнопки */
+.button-group{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:8px 0 16px
+}
+.btn{
+  display:inline-block;padding:12px 20px;border-radius:14px;
+  background:var(--btn);color:#fff;text-decoration:none;font-weight:700;
+  letter-spacing:.2px;box-shadow:0 10px 22px rgba(0,0,0,.25);
+  transition:transform .15s,box-shadow .15s,opacity .15s
+}
+.btn.small{padding:8px 12px;border-radius:10px}
+.btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(0,0,0,.3)}
+.btn:active{transform:translateY(0);opacity:.95}
+
+/* Попапы выбора (Preset / Text Target) */
+.popover{
+  position:fixed; inset:0; display:flex; align-items:flex-start; justify-content:center;
+  background:transparent; z-index:9999;
+}
+.popover[hidden]{display:none}
+.popover-inner{
+  position:relative; margin-top:70px;
+  background:#12142a; border:1px solid rgba(255,255,255,.12);
+  border-radius:14px; padding:14px; min-width:260px;
+  box-shadow:0 18px 48px rgba(0,0,0,.45); z-index:10000;
+}
+.popover-title{margin:4px 0 10px;opacity:.9}
+.popover-actions{display:grid;grid-template-columns:1fr;gap:8px}
+.pop-btn{
+  display:block; width:100%; padding:10px 12px; border-radius:10px; border:0; cursor:pointer;
+  background:var(--panel); color:#fff; font-weight:600; text-align:center;
+  transition:transform .12s, background .12s
+}
+.pop-btn:hover{background:rgba(255,255,255,.12); transform:translateY(-1px)}
+
+/* Инлайн-редактор текста */
+.inline-editor{
+  display:flex; gap:8px; justify-content:center; align-items:center;
+  margin:10px auto 16px; padding:10px; background:var(--panel);
+  border-radius:12px; max-width:720px
+}
+.inline-editor[hidden]{display:none}
+.inline-editor input{
+  flex:1; min-width:160px; padding:10px 12px; border-radius:10px; border:0;
+  outline:none; background:#0f1130; color:#fff; box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)
+}
+
+/* Текстовые зоны */
+#headline{font-size:32px;margin:10px 0 6px}
+#subline{font-size:18px;margin:6px 0 10px;opacity:.95;color:#e6e6e6}
+#quote{font-size:16px;margin:8px 0 14px;font-style:italic;color:#cfcfe4}
+
+/* Превью изображения + корзина */
+.photo-wrap{
+  position:relative;                   /* нужно для позиционирования корзины */
+  margin:18px auto 26px; display:inline-block;
+  border-radius:16px; box-shadow:0 14px 36px rgba(0,0,0,.35);
+  border:3px solid rgba(255,255,255,.12); overflow:hidden;
+}
+.photo-wrap img{
+  display:block; width:100%; height:100%; object-fit:cover;
+}
+
+/* Иконка удаления — ПРАВЫЙ ВЕРХ */
+.remove-icon{
+  position:absolute; top:10px; right:10px; z-index:2;
+  width:36px; height:36px; display:flex; align-items:center; justify-content:center;
+  border:1px solid rgba(255,255,255,.25); border-radius:10px;
+  background:rgba(0,0,0,.35); backdrop-filter:blur(4px);
+  color:#fff; font-size:18px; cursor:pointer; opacity:.95;
+  transition:transform .15s, opacity .15s
+}
+.remove-icon:hover{transform:scale(1.06);opacity:1}
+
+/* Пресеты размеров */
+.img-hero{width:100%; max-width:1100px; height:420px}
+.img-card{width:640px; height:360px}
+.img-avatar{width:200px; height:200px; border-radius:50%}   /* круг */
+.img-avatar img{object-fit:cover}
+
+/* Низ */
+.launch{margin-top:12px}
+footer{margin-top:24px;font-size:14px;opacity:.8}
+
+/* Адаптив */
+@media (max-width:480px){
+  .btn{padding:11px 16px;font-weight:600}
+  .img-card{width:100%; height:54vw; max-height:360px}
+  .img-hero{height:44vw}
+  .popover-inner{width:92%; min-width:auto}
+}

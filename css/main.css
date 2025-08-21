@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background: linear-gradient(135deg,#0b0c1b 0%,#1e1f3a 45%,#3b1f7a 100%);
+  color: #fff;
+  text-align: center;
+  padding: 2rem;
+}
+.hero h1 {
+  margin: .5em 0;
+  font-size: 2.2rem;
+}
+.btn-photo, .btn-text, .btn-download, .btn-nail {
+  background: #ffd60a;
+  color: #111;
+  border: none;
+  padding: .7em 1.2em;
+  margin: .5em;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .2s;
+}
+.btn-photo:hover {
+  transform: scale(1.05);
+}

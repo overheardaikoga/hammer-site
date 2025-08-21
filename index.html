@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hammer-Site</title>
+
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Кнопки действий -->
+    <div class="button-group">
+      <a href="#" id="uploadBtn"   class="btn">📷 Upload Photo</a>
+      <a href="#" id="editBtn"     class="btn">✏️ Edit Text</a>
+      <a href="#" id="downloadBtn" class="btn">💾 Download</a>
+      <a href="#" id="randomBtn"   class="btn">🔨 Random Nail</a>
+    </div>
+
+    <!-- Попап пресетов (вызывается Upload Photo) -->
+    <div id="presetPopover" class="popover" hidden>
+      <div class="popover-inner">
+        <p class="popover-title">Image preset</p>
+        <div class="popover-actions">
+          <button class="pop-btn" data-preset="img-hero">Hero</button>
+          <button class="pop-btn" data-preset="img-card">Card</button>
+          <button class="pop-btn" data-preset="img-avatar">Avatar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Попап цели текста (вызывается Edit Text) -->
+    <div id="textPopover" class="popover" hidden>
+      <div class="popover-inner">
+        <p class="popover-title">Text target</p>
+        <div class="popover-actions">
+          <button class="pop-btn" data-target="headline">Headline</button>
+          <button class="pop-btn" data-target="subline">Subline</button>
+          <button class="pop-btn" data-target="quote">Quote</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Инлайн-редактор (показывается после выбора цели) -->
+    <form id="editForm" class="inline-editor" hidden>
+      <input id="editInput" type="text" placeholder="Введите текст…" />
+      <button type="submit" class="btn small">Save</button>
+      <button type="button" id="editCancel" class="btn small">Cancel</button>
+    </form>
+
+    <!-- Текстовые зоны -->
+    <h1 id="headline">Привет, команда!</h1>
+    <p id="subline">«Молоток — в руку!»</p>
+    <p id="quote"><em>One hammer hit at a time.</em></p>
+
+    <!-- Превью изображения (класс пресета: img-hero / img-card / img-avatar) -->
+    <div id="photoWrap" class="photo-wrap img-card" hidden>
+      <img id="photoPreview" alt="Uploaded photo" />
+      <button id="removePhoto" class="remove-icon" aria-label="Remove photo">🗑</button>
+    </div>
+
+    <!-- Низ страницы -->
+    <section class="launch">
+      <a href="#" class="btn">Launch Now</a>
+    </section>
+    <footer><p>© 2025 OverheardAI Project</p></footer>
+  </div>
+
+  <!-- Скрытые инпуты -->
+  <input type="file" id="fileInput" accept="image/*" hidden />
+
+  <script src="js/app.js"></script>
+</body>
+</html>
