@@ -1,5 +1,6 @@
-//===hammer-site-app.js====
+// ===== Hammer-Site — app.js =====
 
+// Элементы
 const uploadBtn     = document.getElementById("uploadBtn");
 const editBtn       = document.getElementById("editBtn");
 const randomBtn     = document.getElementById("randomBtn");
@@ -122,4 +123,5 @@ btnReset.addEventListener("click", ()=>{
   presetPopover.hidden = true;
   textPopover.hidden = true;
 });
+
 
