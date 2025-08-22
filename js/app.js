@@ -3,7 +3,7 @@ const uploadBtn   = document.getElementById('uploadBtn');
 const editBtn     = document.getElementById('editBtn');
 const downloadBtn = document.getElementById('downloadBtn');
 const randomBtn   = document.getElementById('randomBtn');
-const resetBtn    = document.getElementById('resetBtn');
+const resetBtn = document.getElementById('btnReset');
 
 // ==== image elements ====
 const fileInput = document.getElementById('fileInput');
@@ -73,3 +73,4 @@ resetBtn.addEventListener('click', (e) => {
   if (quoteEl) quoteEl.textContent = '';
   console.log('Reset done');
 });
+
