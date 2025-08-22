@@ -34,6 +34,20 @@ body{
 .btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(0,0,0,.3)}
 .btn:active{transform:translateY(0);opacity:.95}
 
+/* Кнопка Reset */
+.btn-reset{
+  font-size:11px;
+  opacity:.55;
+  border:none;
+  background:none;
+  cursor:pointer;
+  padding:0 4px;
+  align-self:center;
+  color:#fff;
+  transition:opacity .15s;
+}
+.btn-reset:hover{opacity:.9}
+
 /* Попапы выбора (Preset / Text Target) */
 .popover{
   position:fixed; inset:0; display:flex; align-items:flex-start; justify-content:center;
