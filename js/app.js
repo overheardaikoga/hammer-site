@@ -111,8 +111,8 @@ downloadBtn.addEventListener("click", e=>{
 
 // --- Reset (возврат к изначальному состоянию) ---
 btnReset.addEventListener("click", ()=>{
-  headline.innerText = "Привет, команда!";
-  subline.innerText  = "«Молоток — в руку!»";
+  headline.innerText = "Hello, team!";
+  subline.innerText  = "Hammer in hand!»";
   quote.innerText    = "One hammer hit at a time.";
 
   photoPreview.src = "";
@@ -123,5 +123,6 @@ btnReset.addEventListener("click", ()=>{
   presetPopover.hidden = true;
   textPopover.hidden = true;
 });
+
 
 
