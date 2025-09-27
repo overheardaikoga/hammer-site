@@ -1,6 +1,6 @@
 // ===== Hammer-Site — save.js (safe scope) =====
 (() => {
-  const STORAGE_KEY = 'hammerSite_v1';
+  const STORAGE_KEY = 'hammer-site_v1';
 
   /* ---------- элементы ---------- */
   const ctaSelect    = document.getElementById('ctaSelect');
@@ -154,5 +154,3 @@
     });
   }
 })();
-
-
