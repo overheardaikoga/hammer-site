@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -50,15 +50,25 @@
 
     <!-- Инлайн-редактор -->
     <form id="editForm" class="inline-editor" hidden>
-      <input id="editInput" type="text" placeholder="Введите текст…" />
+      <input id="editInput" type="text" placeholder="Enter text…" />
       <button type="submit" class="btn small">Save</button>
       <button type="button" id="editCancel" class="btn small">Cancel</button>
     </form>
 
-    <!-- Text zones -->
-<h1 id="headline">Hello, team!</h1>
-<p id="subline">Hammer in hand!</p>
-<p id="quote"><em>One hammer hit at a time.</em></p>
+    <!-- Текстовые зоны -->
+    <h1 id="headline">Hello, Team!</h1>
+    <p id="subline">“Hammer in hand!”</p>
+    <p id="quote"><em>One hammer hit at a time.</em></p>
+
+    <!-- CTA -->
+<div class="cta-box">
+  <select id="ctaSelect" class="cta-select">
+    <option value="Buy">Buy</option>
+    <option value="Book">Book</option>
+    <option value="Join">Join</option>
+  </select>
+  <a id="ctaButton" href="#" class="btn"></a>
+</div>
 
     <!-- Превью изображения -->
     <div id="photoWrap" class="photo-wrap img-card" hidden>
@@ -78,9 +88,11 @@
   <!-- Скрытые инпуты -->
   <input type="file" id="fileInput" accept="image/*" hidden />
 
+  <!-- ZIP и сохранение -->
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+
   <script src="js/app.js"></script>
+  <script src="js/save.js"></script>
 </body>
 </html>
-
-
-
