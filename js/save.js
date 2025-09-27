@@ -85,7 +85,7 @@
             ? photoPreview.src.match(/data:image\/(\w+)/)[1]
             : 'jpg';
 
-      const html = `<!DOCTYPE html>
+     const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -130,6 +130,12 @@
   </div>
 
   <input type="file" id="fileInput" accept="image/*" hidden />
+
+  <!-- Подключаем библиотеки -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+  <!-- Подключаем наши скрипты -->
   <script src="js/app.js"></script>
   <script src="js/save.js"></script>
 </body>
