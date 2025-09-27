@@ -72,14 +72,15 @@
       e.preventDefault();
       const zip = new JSZip();
 
-      // тянем полный index.html и остальные файлы
-      const [indexHtml, mainCss, appCss, appJs, saveJs] = await Promise.all([
-        safeFetch('index.html'),
-        safeFetch('css/main.css'),
-        safeFetch('css/app.css'),
-        safeFetch('js/app.js'),
-        safeFetch('js/save.js')
-      ]);
+      // тянем index.html из DOM, остальные файлы через fetch
+const indexHtml = document.documentElement.outerHTML;
+
+const [mainCss, appCss, appJs, saveJs] = await Promise.all([
+  safeFetch('css/main.css'),
+  safeFetch('css/app.css'),
+  safeFetch('js/app.js'),
+  safeFetch('js/save.js')
+]);
 
       // кладём файлы
       zip.file("index.html", indexHtml);
@@ -101,3 +102,4 @@
     });
   }
 })();
+
