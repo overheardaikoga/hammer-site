@@ -23,7 +23,10 @@ const headline      = document.getElementById("headline");
 const subline       = document.getElementById("subline");
 const quote         = document.getElementById("quote");
 
-// --- Upload Photo ---
+const ctaSelect     = document.getElementById("ctaSelect");
+const ctaButton     = document.getElementById("ctaButton");
+
+// --- Upload Photo + Presets ---
 uploadBtn.addEventListener("click", e=>{
   e.preventDefault();
   presetPopover.hidden = false;
@@ -45,6 +48,7 @@ fileInput.addEventListener("change", e=>{
     reader.onload = ev=>{
       photoPreview.src = ev.target.result;
       photoWrap.hidden = false;
+      saveState();
     };
     reader.readAsDataURL(file);
   }
@@ -53,6 +57,7 @@ removePhoto.addEventListener("click", ()=>{
   photoPreview.src = "";
   photoWrap.hidden = true;
   fileInput.value = "";
+  saveState();
 });
 
 // --- Edit Text ---
@@ -76,11 +81,19 @@ editForm.addEventListener("submit", e=>{
   e.preventDefault();
   if(currentTarget){
     document.getElementById(currentTarget).innerText = editInput.value;
+    saveState();
   }
   editForm.hidden = true;
 });
 editCancel.addEventListener("click", ()=>{
   editForm.hidden = true;
+});
+
+// --- CTA Select ---
+ctaButton.textContent = ctaSelect.value;
+ctaSelect.addEventListener("change", ()=>{
+  ctaButton.textContent = ctaSelect.value;
+  saveState();
 });
 
 // --- Random Nail ---
@@ -95,6 +108,7 @@ randomBtn.addEventListener("click", e=>{
   e.preventDefault();
   const rnd = nails[Math.floor(Math.random()*nails.length)];
   quote.innerText = rnd;
+  saveState();
 });
 
 // --- Download (сохраняем HTML как txt) ---
@@ -109,20 +123,53 @@ downloadBtn.addEventListener("click", e=>{
   URL.revokeObjectURL(url);
 });
 
-// --- Reset (возврат к изначальному состоянию) ---
+// --- Reset ---
 btnReset.addEventListener("click", ()=>{
-  headline.innerText = "Hello, team!";
-  subline.innerText  = "Hammer in hand!»";
+  headline.innerText = "Hello, Team!";
+  subline.innerText  = "“Hammer in hand!”";
   quote.innerText    = "One hammer hit at a time.";
+
+  ctaSelect.value = "Buy";
+  ctaButton.textContent = "Buy";
 
   photoPreview.src = "";
   photoWrap.hidden = true;
   fileInput.value = "";
-  
+
   editForm.hidden = true;
   presetPopover.hidden = true;
   textPopover.hidden = true;
+
+  localStorage.removeItem("hammerState");
 });
 
-
-
+// --- Save & Load State ---
+function saveState(){
+  const state = {
+    headline: headline.innerText,
+    subline: subline.innerText,
+    quote: quote.innerText,
+    cta: ctaSelect.value,
+    photo: photoPreview.src || "",
+    photoClass: photoWrap.className
+  };
+  localStorage.setItem("hammerState", JSON.stringify(state));
+}
+function loadState(){
+  const data = localStorage.getItem("hammerState");
+  if(!data) return;
+  const d = JSON.parse(data);
+  if(d.headline) headline.innerText = d.headline;
+  if(d.subline)  subline.innerText = d.subline;
+  if(d.quote)    quote.innerText   = d.quote;
+  if(d.cta){
+    ctaSelect.value = d.cta;
+    ctaButton.textContent = d.cta;
+  }
+  if(d.photo){
+    photoPreview.src = d.photo;
+    photoWrap.className = d.photoClass || "photo-wrap img-card";
+    photoWrap.hidden = false;
+  }
+}
+loadState();
