@@ -1,4 +1,4 @@
-// ===== Hammer-Site — save.js (safe scope) =====
+// ===== Hammer-Site — save.js =====
 (() => {
   const STORAGE_KEY = 'hammer-site_v1';
 
@@ -72,77 +72,17 @@
       e.preventDefault();
       const zip = new JSZip();
 
-      // файлы
-      const [mainCss, appCss, appJs, saveJs] = await Promise.all([
+      // тянем полный index.html и остальные файлы
+      const [indexHtml, mainCss, appCss, appJs, saveJs] = await Promise.all([
+        safeFetch('index.html'),
         safeFetch('css/main.css'),
         safeFetch('css/app.css'),
         safeFetch('js/app.js'),
         safeFetch('js/save.js')
       ]);
 
-      // html
-      const ext = (!photoWrap.hidden && photoPreview.src.startsWith('data:image'))
-            ? photoPreview.src.match(/data:image\/(\w+)/)[1]
-            : 'jpg';
-
-     const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hammer-Site</title>
-  <link rel="stylesheet" href="css/main.css" />
-  <link rel="stylesheet" href="css/app.css" />
-</head>
-<body>
-  <div class="container">
-    <div class="button-group">
-      <a href="#" id="uploadBtn" class="btn">📷 Upload Photo</a>
-      <a href="#" id="editBtn" class="btn">✏️ Edit Text</a>
-      <a href="#" id="downloadBtn" class="btn">💾 Download</a>
-      <a href="#" id="randomBtn" class="btn">🔨 Random Nail</a>
-      <button id="btnReset" style="font-size:10px;opacity:.5;border:none;background:none;cursor:pointer;">reset</button>
-    </div>
-
-    <h1 id="headline">${headline.innerText}</h1>
-    <p id="subline">${subline.innerText}</p>
-    <p id="quote"><em>${quote.innerText}</em></p>
-
-    <div class="cta-box">
-      <select id="ctaSelect" class="btn small">
-        <option value="Buy" ${ctaSelect.value==='Buy'?'selected':''}>Buy</option>
-        <option value="Book" ${ctaSelect.value==='Book'?'selected':''}>Book</option>
-        <option value="Join" ${ctaSelect.value==='Join'?'selected':''}>Join</option>
-      </select>
-      <a id="ctaButton" href="#" class="btn">${ctaSelect.value}</a>
-    </div>
-
-    ${
-      photoWrap.hidden
-        ? ''
-        : `<div id="photoWrap" class="photo-wrap img-card">
-             <img src="assets/photo.${ext}" alt="photo"/>
-           </div>`
-    }
-
-    <section class="launch"><a href="#" class="btn">Launch Now</a></section>
-    <footer><p>© 2025 OverheardAI Project</p></footer>
-  </div>
-
-  <input type="file" id="fileInput" accept="image/*" hidden />
-
-  <!-- Подключаем библиотеки -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-
-  <!-- Подключаем наши скрипты -->
-  <script src="js/app.js"></script>
-  <script src="js/save.js"></script>
-</body>
-</html>`;
-
       // кладём файлы
-      zip.file("index.html", html);
+      zip.file("index.html", indexHtml);
       zip.file("css/main.css", mainCss);
       zip.file("css/app.css",  appCss);
       zip.file("js/app.js",   appJs);
@@ -150,6 +90,7 @@
 
       // картинка
       if (!photoWrap.hidden && photoPreview.src.startsWith('data:image')) {
+        const ext = photoPreview.src.match(/data:image\/(\w+)/)[1];
         const base64 = photoPreview.src.split(',')[1];
         zip.file(`assets/photo.${ext}`, base64, {base64: true});
       }
